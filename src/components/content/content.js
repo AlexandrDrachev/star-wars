@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {getPlanetsAction} from "./redux/content-actions";
 import Spinner from "../spinner";
+import Planet from "./planet";
 
 const Content = () => {
 
@@ -58,13 +59,26 @@ const Content = () => {
         });
     };
 
+    const renderPlanets = () => {
+        return dataPlanets.map((planet, idx) => {
+            return (
+                <div key={idx} className="w-1/3 mx-10">
+                    <Planet name={planet.name}/>
+                </div>
+            );
+        });
+    };
+
     if (loading) {
         return <Spinner color={`text-blue-600`} h={`h-30`} w={`w-40`} />
     }
 
     return (
         <div className="w-full flex flex-col justify-center items-center">
-            <div>Content</div>
+            {dataPlanets &&
+            <div className="w-full m-10 flex justify-center items-center flex-wrap">
+                {renderPlanets()}
+            </div>}
             {pages &&
             <div className="w-full flex justify-start items-center">
                 {renderPagination()}
