@@ -6,7 +6,9 @@ module.exports = {
   purge: [
       "./public/index.html",
       "./src/index.js",
-      "./src/components/app/app.js"
+      "./src/components/app/app.js",
+      "./src/components/content/content.js",
+      "./src/components/footer/footer.js",
   ],
   theme: {
     extend: {},
