@@ -1,6 +1,7 @@
 
 
 export const initialContentState = {
+    loading: false,
     planets: null,
     countPlanets: null,
     people: null
@@ -17,6 +18,11 @@ export const contentReducer = (state, action) => {
                 ...state,
                 planets: action.payload.results,
                 countPlanets: action.payload.count
+            };
+        case "TOGGLE_CONTENT_LOADING":
+            return {
+                ...state,
+                loading: action.payload
             };
         default: {
             return state;

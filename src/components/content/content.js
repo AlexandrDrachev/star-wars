@@ -12,10 +12,12 @@ const Content = () => {
     const dispatch = useDispatch();
     const planets = useSelector((state) => state.contentState.planets);
     const countPlanets = useSelector((state) => state.contentState.countPlanets);
+    const loading = useSelector((state) => state.contentState.loading);
     const [ pages, setPages ] = useState(null);
 
     useEffect(() => {
         if (!planets) {
+            console.log(5);
             dispatch(getPlanetsAction(countPage));
         }
         console.log(planets);
@@ -56,7 +58,7 @@ const Content = () => {
         });
     };
 
-    if (!dataPlanets) {
+    if (loading) {
         return <Spinner color={`text-blue-600`} h={`h-30`} w={`w-40`} />
     }
 

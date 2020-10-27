@@ -13,3 +13,10 @@ export const getPlanetsSaga = (planets) => {
         payload: planets
     };
 };
+
+export const toggleContentLoading = (bool) => {
+    return {
+        type: "TOGGLE_CONTENT_LOADING",
+        payload: bool
+    };
+};

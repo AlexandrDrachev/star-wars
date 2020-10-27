@@ -1,5 +1,5 @@
-import { take, call, put, select } from "redux-saga/effects";
-import {getPlanetsSaga} from "./content-actions";
+import { take, call, put, select, delay } from "redux-saga/effects";
+import {getPlanetsSaga, toggleContentLoading} from "./content-actions";
 
 const baseUrl = "https://swapi.dev/api/";
 
@@ -16,7 +16,10 @@ export function* getPlanetsWatcher() {
 }
 
 function* getPlanetsWorker(numberPage) {
+    yield put(toggleContentLoading(true));
+    yield delay(800);
     const planets = yield call(getPlanets, numberPage);
     console.log('planets: ', planets);
     yield put(getPlanetsSaga(planets));
+    yield put(toggleContentLoading(false));
 }
