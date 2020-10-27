@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+        'blackOpsOne': 'Black Ops One'
+    }
   },
   variants: {},
   plugins: [],
