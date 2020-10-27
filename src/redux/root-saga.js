@@ -1,11 +1,13 @@
 import { all } from "redux-saga/effects"
 
 import { appSagaTestWatcher } from "../components/app/redux/app-sagas";
+import { getPlanetsWatcher } from "../components/content/redux/content-sagas";
 
 export function* rootSaga() {
     yield all([
         testSaga(),
-        appSagaTestWatcher()
+        appSagaTestWatcher(),
+        getPlanetsWatcher()
     ]);
 }
 
