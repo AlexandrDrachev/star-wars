@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {getPlanetAction, getPlanetsAction} from "../content/redux/content-actions";
+import { getPlanetsAction } from "../content/redux/content-actions";
 
 const PlanetInfo = ({ match }) => {
-    console.log(match);
 
     const dispatch = useDispatch();
     const planets = useSelector((state) => state.contentState.planets);
@@ -29,7 +28,6 @@ const PlanetInfo = ({ match }) => {
             )
                 .then((res) => setResidents(res))
                 .catch((error) => console.log(error));
-            console.log(residents);
             setPlanetInfo(planet);
         } else {
             dispatch(getPlanetsAction(Math.ceil(id / 10)));
@@ -37,7 +35,6 @@ const PlanetInfo = ({ match }) => {
     }, [planets]);
 
     const renderResidents = () => {
-        console.log(planetInfo);
         return residents.map((item, idx) => {
             if (!item) {
                 return null;

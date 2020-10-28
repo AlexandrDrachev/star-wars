@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import {getPlanetsAction} from "./redux/content-actions";
+import { getPlanetsAction } from "./redux/content-actions";
 import Spinner from "../spinner";
 import Planet from "./planet";
 
-const Content = ({ history, match }) => {
+const Content = () => {
 
     const [ dataPlanets, setDataPlanets ] = useState(null);
     const [ countPage, setCountPage ] = useState(1);
@@ -18,15 +18,8 @@ const Content = ({ history, match }) => {
 
     useEffect(() => {
         if (!planets) {
-            console.log(5);
             dispatch(getPlanetsAction(countPage));
-        }
-        console.log(planets);
-    }, [planets]);
-
-    useEffect(() => {
-        if (planets) {
-            console.log(777);
+        } else {
             setDataPlanets(planets);
         }
     }, [planets]);
@@ -38,7 +31,6 @@ const Content = ({ history, match }) => {
                 pagesArr.push(i);
             }
             setPages(pagesArr);
-            console.log(pages);
         }
     }, [countPlanets]);
 

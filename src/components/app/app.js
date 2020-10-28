@@ -12,8 +12,6 @@ import PlanetInfo from "../planet-info";
 
 const App = () => {
 
-    const dispatch = useDispatch();
-
     return (
         <div>
             <div
