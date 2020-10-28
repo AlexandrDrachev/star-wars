@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { useDispatch } from "react-redux";
 
@@ -22,6 +22,7 @@ const App = () => {
                 <Switch>
                     <Route path="/" exact component={Content} />
                     <Route path="/planet/:id?" component={PlanetInfo} />
+                    <Redirect to="/"/>
                 </Switch>
                 <Footer />
             </div>

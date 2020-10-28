@@ -5,7 +5,7 @@ import {getPlanetsAction} from "./redux/content-actions";
 import Spinner from "../spinner";
 import Planet from "./planet";
 
-const Content = () => {
+const Content = ({ history, match }) => {
 
     const [ dataPlanets, setDataPlanets ] = useState(null);
     const [ countPage, setCountPage ] = useState(1);
@@ -26,6 +26,7 @@ const Content = () => {
 
     useEffect(() => {
         if (planets) {
+            console.log(777);
             setDataPlanets(planets);
         }
     }, [planets]);
@@ -63,7 +64,7 @@ const Content = () => {
         return dataPlanets.map((planet, idx) => {
             return (
                 <div key={idx} className="w-1/3 mx-10">
-                    <Planet name={planet.name} climate={planet.climate} population={planet.population} />
+                    <Planet name={planet.name} climate={planet.climate} population={planet.population} routeId={planet.id}/>
                 </div>
             );
         });
