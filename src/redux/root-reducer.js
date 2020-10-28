@@ -7,8 +7,6 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-    console.log('action: ', action.type);
-    console.log('state: ', state);
     const { appState, contentState } = state;
     return {
         appState: appReducer(appState, action),

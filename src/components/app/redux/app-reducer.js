@@ -8,9 +8,7 @@ export const appReducer = (state, action) => {
         return initialAppState;
     }
     switch (action.type) {
-        case "APP_STATE_TEST_SAGA":
-            console.log('appState: ', state);
-            return state;
+
         default:
             return state;
     }

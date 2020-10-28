@@ -1,4 +1,4 @@
-import { take, call, put, select, delay } from "redux-saga/effects";
+import { take, call, put, delay } from "redux-saga/effects";
 import { getPlanetsSaga, toggleContentLoading } from "./content-actions";
 
 const baseUrl = "https://swapi.dev/api/";
@@ -22,9 +22,11 @@ export function* getPlanetsWatcher() {
 }
 
 function* getPlanetsWorker(numberPage) {
+    const defaultNumberPage = 1;
+    localStorage.setItem("countPage", numberPage || defaultNumberPage);
     yield put(toggleContentLoading(true));
     yield delay(800);
-    const planets = yield call(getPlanets, numberPage);
+    const planets = yield call(getPlanets, numberPage || defaultNumberPage);
     const transformPlanets = () => planets.results.map((planet) => {
         const id = extractId(planet);
         return {
@@ -33,23 +35,6 @@ function* getPlanetsWorker(numberPage) {
         };
     });
     planets.results = yield call(transformPlanets);
-    console.log('planets: ', planets);
     yield put(getPlanetsSaga(planets));
     yield put(toggleContentLoading(false));
-}
-
-export function* getResidentsWatcher() {
-    while (true) {
-        yield take();
-        yield call(getResidentsWorker);
-    }
-}
-
-function* getResidentsWorker(residents) {
-    return residents.map((url) => {
-        return fetch(url)
-            .then((res) => res.json())
-            .then((res) => res)
-            .catch((error) => console.log(error))
-    })
 }

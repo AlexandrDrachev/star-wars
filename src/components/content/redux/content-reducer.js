@@ -13,7 +13,6 @@ export const contentReducer = (state, action) => {
     }
     switch (action.type) {
         case "GET_PLANETS_SAGA":
-            console.log(action.payload);
             return {
                 ...state,
                 planets: action.payload.results,

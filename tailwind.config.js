@@ -7,9 +7,12 @@ module.exports = {
       "./public/index.html",
       "./src/index.js",
       "./src/components/app/app.js",
+      "./src/components/header/header.js",
       "./src/components/content/content.js",
+      "./src/components/content/planet/planet.js",
       "./src/components/planet-info/planet-info.js",
       "./src/components/footer/footer.js",
+      "./src/components/spinner/spinner.js",
   ],
   theme: {
     extend: {},

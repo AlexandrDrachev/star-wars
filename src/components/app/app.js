@@ -2,9 +2,6 @@ import React from "react";
 
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { useDispatch } from "react-redux";
-
-import Spinner from "../spinner/spinner";
 import Header from "../header";
 import Content from "../content";
 import Footer from "../footer";

@@ -5,16 +5,15 @@ import { getPlanetsAction } from "./redux/content-actions";
 import Spinner from "../spinner";
 import Planet from "./planet";
 
-const Content = () => {
+const Content = ({ match }) => {
 
     const [ dataPlanets, setDataPlanets ] = useState(null);
-    const [ countPage, setCountPage ] = useState(1);
-
-    const dispatch = useDispatch();
-    const planets = useSelector((state) => state.contentState.planets);
-    const countPlanets = useSelector((state) => state.contentState.countPlanets);
-    const loading = useSelector((state) => state.contentState.loading);
+    const [ countPage, setCountPage ] = useState(null);
     const [ pages, setPages ] = useState(null);
+    const dispatch = useDispatch();
+    const contentState = useSelector((state) => state.contentState);
+    const { planets, countPlanets, loading } = contentState;
+    const { id } = match.params;
 
     useEffect(() => {
         if (!planets) {
@@ -22,7 +21,15 @@ const Content = () => {
         } else {
             setDataPlanets(planets);
         }
-    }, [planets]);
+    }, [planets, countPage, dispatch]);
+
+    useEffect(() => {
+        if (id) {
+            setCountPage(Math.ceil(id / 10));
+        } else {
+            setCountPage(localStorage.getItem("countPage"));
+        }
+    }, [id, countPage]);
 
     useEffect(() => {
         let pagesArr = [];
@@ -44,7 +51,7 @@ const Content = () => {
                         dispatch(getPlanetsAction(page));
                     }}
                     className={`text-xl mx-5 rounded px-3 pt-1 cursor-pointer flex flex-col
-                justify-center items-center ${countPage === page ? `bg-gray-700` : `bg-gray-900`}
+                justify-center items-center ${+countPage === page ? `bg-gray-700` : `bg-gray-900`}
                 hover:bg-gray-700`}>
                     {page}
                 </div>
@@ -73,7 +80,7 @@ const Content = () => {
                 {renderPlanets()}
             </div>}
             {pages &&
-            <div className="w-full flex justify-start items-center">
+            <div className="w-full flex justify-center items-center">
                 {renderPagination()}
             </div>}
         </div>

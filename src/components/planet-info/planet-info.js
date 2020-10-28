@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPlanetsAction } from "../content/redux/content-actions";
+import Spinner from "../spinner/spinner";
 
 const PlanetInfo = ({ match }) => {
 
@@ -29,10 +30,11 @@ const PlanetInfo = ({ match }) => {
                 .then((res) => setResidents(res))
                 .catch((error) => console.log(error));
             setPlanetInfo(planet);
+            return;
         } else {
             dispatch(getPlanetsAction(Math.ceil(id / 10)));
         }
-    }, [planets]);
+    }, [planets, dispatch, id]);
 
     const renderResidents = () => {
         return residents.map((item, idx) => {
@@ -43,10 +45,14 @@ const PlanetInfo = ({ match }) => {
                 <div key={idx}>{item}</div>
             );
         });
+    };
+
+    if (!planetInfo) {
+        return <Spinner w={`w-40`} h={`h-30`} color={`text-blue-600`} />
     }
 
     return planetInfo &&
-        <div className="w-full flex justify-start items-center mt-5 pb-5 border-b-4 border-white">
+        <div className="w-full flex justify-start items-center mt-5 pb-5 border-white">
             <div className="w-1/2 flex justify-start items-start text-4xl">{planetInfo.name}</div>
             <div className="w-1/2 flex flex-col justify-start items-start">
                 <div className="w-full flex justify-start items-start p-2 bg-gray-900 rounded-t-md">
