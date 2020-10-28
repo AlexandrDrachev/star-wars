@@ -63,7 +63,7 @@ const Content = () => {
         return dataPlanets.map((planet, idx) => {
             return (
                 <div key={idx} className="w-1/3 mx-10">
-                    <Planet name={planet.name}/>
+                    <Planet name={planet.name} climate={planet.climate} population={planet.population} />
                 </div>
             );
         });

@@ -1,11 +1,14 @@
 import React from "react";
 
+import { Route, Switch } from 'react-router-dom';
+
 import { useDispatch } from "react-redux";
 
 import Spinner from "../spinner/spinner";
 import Header from "../header";
 import Content from "../content";
 import Footer from "../footer";
+import PlanetInfo from "../planet-info";
 
 const App = () => {
 
@@ -16,7 +19,10 @@ const App = () => {
             <div
                 className="w-full container mx-auto flex flex-col justify-center items-center text-white text-sm font-blackOpsOne">
                 <Header />
-                <Content />
+                <Switch>
+                    <Route path="/" exact component={Content} />
+                    <Route path="/planet/:id?" component={PlanetInfo} />
+                </Switch>
                 <Footer />
             </div>
         </div>
